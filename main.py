@@ -1,3 +1,8 @@
+from fastapi import FastAPI
+app = FastAPI()
+
+# Define your routes and other FastAPI configurations here
+
 from typing import Union
 import pandas as pd
 from fastapi import FastAPI
@@ -14,7 +19,6 @@ df_f6_df_expanded = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_
 df_f6_get_director = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f6_get_director.pkl')
 df_f7_one_hot_genres = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f7_one_hot_genres.pkl')
 
-app = FastAPI()
 
 
 
