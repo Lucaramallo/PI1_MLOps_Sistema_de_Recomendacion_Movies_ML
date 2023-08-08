@@ -10,15 +10,14 @@ import itertools
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
 
-df_f1_lang_movie_count = pd.read_pickle('./Datasets Cleaned & light/df_f1_lang_movie_count.pkl')
-df_f2_movies_runtime = pd.read_pickle('./Datasets Cleaned & light/df_f2_movies_runtime.pkl')
-df_f3_collection_name_returns = pd.read_pickle('./Datasets Cleaned & light/df_f3_collection_name_returns.pkl')
-df_f4_production_countrys = pd.read_pickle('./Datasets Cleaned & light/df_f4_production_countrys.pkl')
-df_f5_production_companies_return = pd.read_pickle('./Datasets Cleaned & light/df_f5_production_companies_return.pkl')
-df_f6_df_expanded = pd.read_pickle('./Datasets Cleaned & light/df_f6_df_expanded.pkl')
-df_f6_get_director = pd.read_pickle('./Datasets Cleaned & light/df_f6_get_director.pkl')
-df_f7_one_hot_genres = pd.read_pickle('./Datasets Cleaned & light/df_f7_one_hot_genres.pkl')
-
+df_f1_lang_movie_count = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f1_lang_movie_count.pkl')
+df_f2_movies_runtime = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f2_movies_runtime.pkl')
+df_f3_collection_name_returns = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f3_collection_name_returns.pkl')
+df_f4_production_countrys = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f4_production_countrys.pkl')
+df_f5_production_companies_return = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f5_production_companies_return.pkl')
+df_f6_df_expanded = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f6_df_expanded.pkl')
+df_f6_get_director = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f6_get_director.pkl')
+df_f7_one_hot_genres = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f7_one_hot_genres.pkl')
 
 
 
