@@ -39,7 +39,6 @@ def peliculas_idioma(idioma:str):
     return {'idioma':idioma, 'cantidad':count}
     
 
-peliculas_idioma('English')
 
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name:str):
@@ -61,7 +60,7 @@ def peliculas_duracion(movie_name:str):
         print(f"No se encontró la película: {movie_name}")
     return {'pelicula':movie_name, 'duracion':runtime, 'anio':year}
 
-peliculas_duracion('toy story')
+
 
 @app.get('/franquicia/{franquicia}')
 def franquicia(collection_name:str):
@@ -87,7 +86,6 @@ def franquicia(collection_name:str):
     print(f"La franquicia {collection_name} posee {cantidad_peliculas} películas, una ganancia total de {ganancia_total:.2f} y una ganancia promedio de {ganancia_promedio:.2f}, aproximadamente...")
     return {'franquicia':collection_name, 'cantidad':cantidad_peliculas, 'ganancia_total':ganancia_total, 'ganancia_promedio':ganancia_promedio}
 
-franquicia('00 schneider filmreihe')
 
 
 @app.get('/peliculas_pais/{pais}')
@@ -99,7 +97,7 @@ def peliculas_pais(pais:str):
     print(f"Se han producido {cantidad_peliculas} películas en {pais}.")
     return {'pais':pais, 'cantidad':cantidad_peliculas}
 
-peliculas_pais('argentina')
+
 
 @app.get('/productoras_exitosas/{productora}')
 def productoras_exitosas(productora:str):
@@ -116,8 +114,6 @@ def productoras_exitosas(productora:str):
     cant_movies = productora_data['count_movies'].sum()
     print(f"La productora '{productora}' ha tenido un return de {round(revenue_total, 2)} aproximadamente, es decir, que ha multiplicado sus budget_totales unas {round(revenue_total, 0)} veces haciendo peliculas y ha realizado {cant_movies} peliculas...")
     return {'productora':productora, 'revenue_total': revenue_total,'cantidad':cant_movies}
-
-productoras_exitosas('pixar')
 
 
 
@@ -160,9 +156,6 @@ def get_director(nombre_director: str):
                 'peliculas': flattened_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
                 'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula}
 
-get_director('Quentin Tarantino')
-
-
 
 # ML
 @app.get('/recomendacion/{reference_movie}')
@@ -192,4 +185,3 @@ def recomendacion(reference_movie:str, n=16, cutoff=0.5):
         print(f"No se encontró la película '{results['movie_reference']}'. ¿Quizás quisiste decir alguna de estas?")
         print(results['suggested_titles'])
    
-recomendacion('Toy story')
