@@ -39,6 +39,7 @@ for url in urls:
 df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_f4_production_countrys, df_f5_production_companies_return, df_f6_df_expanded, df_f6_get_director, df_f7_one_hot_genres = dataframes
 
 # Ahora @app.get('/peliculas_idioma/{idioma}')
+@app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma: str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo'''
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
