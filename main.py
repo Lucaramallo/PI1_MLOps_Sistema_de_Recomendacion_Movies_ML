@@ -121,9 +121,8 @@ def peliculas_pais(pais: str):
     return response_dict
 
 
-
 @app.get('/productoras_exitosas/{productora}')
-def productoras_exitosas(productora:str):
+def productoras_exitosas(productora: str):
     '''Ingresas la productora, entregandote el revunue total y la cantidad de peliculas que realizo '''
     # Filtrar el dataframe para obtener los datos de la productora deseada
     productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(productora, case=False, na=False)]
@@ -139,11 +138,12 @@ def productoras_exitosas(productora:str):
     # Crear el diccionario de respuesta
     response_dict = {
         'productora': productora,
-        'revenue_total': revenue_total,
-        'cantidad': cant_movies
+        'revenue_total': revenue_total.item(),
+        'cantidad': cant_movies.item()
     }
 
     return response_dict
+
 
 
 @app.get('/get_director/{nombre_director}')
