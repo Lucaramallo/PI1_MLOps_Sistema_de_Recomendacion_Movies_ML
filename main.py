@@ -132,7 +132,7 @@ def productoras_exitosas(productora: str):
         return {'mensaje': f"La productora '{productora}' no fue encontrada en el dataframe."}
 
     # Calcular el revenue total de la productora
-    revenue_total = productora_data['return_per_company'].sum()
+    revenue_total = round(productora_data['return_per_company'].sum())
     cant_movies = productora_data['count_movies'].sum()
 
     # Crear el diccionario de respuesta
@@ -143,7 +143,6 @@ def productoras_exitosas(productora: str):
     }
 
     return response_dict
-
 
 
 @app.get('/get_director/{nombre_director}')
@@ -176,16 +175,16 @@ def get_director(nombre_director: str):
                 'release_date': movie_search_df['release_date'].iloc[0],
                 'budget': movie_search_df['budget'].iloc[0],
                 'revenue': movie_search_df['revenue'].iloc[0],
-                'return': movie_search_df['return'].iloc[0]
+                'return': movie_search_df['return'].iloc[0].item()  # Convertir a tipo Python nativo
             }
             peliculas_info.append(movie_info)
 
-        return {
-            'director': nombre_director,
+        response_dict = {
             'retorno_total_director': retorno_total_director,
-            'peliculas': peliculas_info
+            'peliculas_info': peliculas_info
         }
 
+        return response_dict
 
 
 
