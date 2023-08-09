@@ -126,7 +126,7 @@ def peliculas_pais(pais: str):
     # Filter out rows with missing values in the 'country_names' column, then use .str.contains()
     filtered_df = df_f4_production_countrys.dropna(subset=['country_names'])
     count = filtered_df[filtered_df['country_names'].str.contains(pais, case=False)].shape[0]
-    
+
     # Create the response dictionary
     response_dict = {
         'pais': pais,
@@ -144,8 +144,9 @@ def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total, ej pixar'''
     production_company = production_company.lower()
     # Filtrar el dataframe para obtener los datos de la productora deseada
-    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company)]
+    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False)]
 
+    
     # Verificar si la productora existe en el dataframe
     if productora_data.empty:
         return f"La productora '{production_company}' no fue encontrada en el dataframe."
