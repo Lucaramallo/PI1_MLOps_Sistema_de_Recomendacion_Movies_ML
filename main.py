@@ -119,14 +119,14 @@ def franquicia(collection_name: str):
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais: str):
     '''Ingresas el país, retornando la cantidad de películas producidas en el mismo'''
+    # Contar las películas producidas en el país proporcionado
+    pais = pais.lower()
+    count = df_f4_production_countrys[df_f4_production_countrys['country_names'] == pais].count()
     
-    # Contar las películas producidas en el país proporcionado (teniendo en cuenta las listas de valores)
-    cantidad_peliculas = df_f4_production_countrys.apply(lambda x: pais.lower() in x).sum().item()
-
     # Crear el diccionario de respuesta
     response_dict = {
         'pais': pais,
-        'cantidad': cantidad_peliculas
+        'cantidad': count
     }
 
     return response_dict
