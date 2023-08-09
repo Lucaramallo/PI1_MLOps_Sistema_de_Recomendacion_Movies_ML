@@ -55,7 +55,7 @@ def peliculas_idioma(idioma: str):
     else:
         return {'idioma': idioma, 'cantidad': 0}  # Asegurarse de devolver un valor válido
 
-peliculas_idioma('english')
+# peliculas_idioma('english')
 
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name: str):
@@ -81,7 +81,7 @@ def peliculas_duracion(movie_name: str):
 
     return response_dict
 
-peliculas_duracion('toy story')
+# peliculas_duracion('toy story')
 
 @app.get('/franquicia/{collection_name}')
 def franquicia(collection_name: str):
@@ -114,7 +114,7 @@ def franquicia(collection_name: str):
     return response_dict
 
 
-franquicia('toy story collection')
+# franquicia('toy story collection')
 
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais: str):
@@ -132,7 +132,7 @@ def peliculas_pais(pais: str):
     return response_dict
 
 
-peliculas_pais('argentina')
+# peliculas_pais('argentina')
 
 
 
@@ -141,17 +141,17 @@ def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total'''
 
     # Filtrar los datos en función del valor de la columna 'production_company'
-    df_return = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False, na=False)]
+    df_return = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'] == production_company]
 
     # Verificar si la productora fue encontrada
     if df_return.empty:
         return f"No se encontró la productora '{production_company}' en el dataframe."
 
     # Calcular el promedio de ganancias
-    revenue_mean = round(df_return['return_mean'].mean())
+    revenue_mean = df_return['revenue_per_company'].mean()
 
     # Calcular la ganancia total
-    revenue_total = round(df_return['return_sum'].sum())
+    revenue_total = df_return['revenue_per_company'].sum()
 
     # Crear el diccionario de respuesta
     response_dict = {
@@ -163,7 +163,7 @@ def productoras_exitosas(production_company: str):
     return response_dict
 
 
-productoras_exitosas('pixar')
+# productoras_exitosas('pixar')
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
@@ -204,7 +204,7 @@ def get_director(nombre_director: str):
 
 
 
-get_director('quentin tarantino')
+# get_director('quentin tarantino')
 
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
@@ -225,4 +225,4 @@ def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
         results['suggested_titles'] = similar_titles
 
     return results
-recomendacion('toy story')
+# recomendacion('toy story')
