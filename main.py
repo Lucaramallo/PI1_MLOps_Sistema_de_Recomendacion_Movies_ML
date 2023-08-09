@@ -53,10 +53,6 @@ def peliculas_idioma(idioma: str):
     else:
         return {'idioma': idioma, 'cantidad': 0}  # Asegurarse de devolver un valor válido
 
-
-
-
-
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name: str):
     '''Ingresas la pelicula, retornando la duracion y el año'''
@@ -66,8 +62,8 @@ def peliculas_duracion(movie_name: str):
 
     if not filtered_df.empty:
         # Obtener el valor del runtime
-        runtime = filtered_df['runtime'].values[0]
-        year = filtered_df['release_year'].values[0]
+        runtime = filtered_df['runtime'].values[0].item()  # Convertir a tipo nativo de Python
+        year = filtered_df['release_year'].values[0].item()  # Convertir a tipo nativo de Python
 
         # Crear el diccionario de respuesta
         response_dict = {
@@ -80,6 +76,7 @@ def peliculas_duracion(movie_name: str):
         response_dict = {}
 
     return response_dict
+
 
 @app.get('/franquicia/{franquicia}')
 def franquicia(collection_name:str):
