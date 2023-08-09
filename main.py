@@ -83,7 +83,6 @@ def peliculas_duracion(movie_name: str):
 
 peliculas_duracion('toy story')
 
-
 @app.get('/franquicia/{collection_name}')
 def franquicia(collection_name: str):
     '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio'''
@@ -96,13 +95,13 @@ def franquicia(collection_name: str):
         return f"No se encontró la colección '{collection_name}' en el dataframe."
 
     # Calcular la cantidad de películas
-    cantidad_peliculas = df_return['id_list'].apply(len).sum()
+    cantidad_peliculas = df_return['id_list'].apply(len).sum().item()
 
     # Calcular la ganancia total
-    ganancia_total = round(df_return['return_sum'].sum())
+    ganancia_total = round(df_return['return_sum'].sum(), 2)
 
     # Calcular la ganancia promedio
-    ganancia_promedio = round(df_return['return_mean'].mean())
+    ganancia_promedio = round(df_return['return_mean'].mean(), 2)
 
     # Crear el diccionario de respuesta
     response_dict = {
@@ -119,27 +118,30 @@ franquicia('toy story collection')
 
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais: str):
-    '''Ingresas el pais, retornando la cantidad de peliculas producidas en el mismo'''
+    '''Ingresas el país, retornando la cantidad de películas producidas en el mismo'''
     
     # Contar las películas producidas en el país proporcionado (teniendo en cuenta las listas de valores)
-    cantidad_peliculas = df_f4_production_countrys.apply(lambda x: pais.lower() in x).sum()
+    cantidad_peliculas = df_f4_production_countrys.apply(lambda x: pais.lower() in x).sum().item()
 
     # Crear el diccionario de respuesta
     response_dict = {
         'pais': pais,
-        'cantidad': cantidad_peliculas.item()
+        'cantidad': cantidad_peliculas
     }
 
     return response_dict
 
+
 peliculas_pais('argentina')
+
+
 
 @app.get('/productoras_exitosas/{production_company}')
 def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total'''
 
     # Filtrar los datos en función del valor de la columna 'production_company'
-    df_return = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'] == production_company]
+    df_return = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False, na=False)]
 
     # Verificar si la productora fue encontrada
     if df_return.empty:
