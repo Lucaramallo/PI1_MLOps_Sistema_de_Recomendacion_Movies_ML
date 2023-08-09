@@ -186,9 +186,6 @@ def get_director(nombre_director: str):
         return response_dict
 
 
-
-
-
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
     '''Ingresas un nombre de película y te recomienda las similares en una lista'''
