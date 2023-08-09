@@ -10,18 +10,35 @@ import pandas as pd
 import itertools
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
-
-df_f1_lang_movie_count = pd.read_pickle('./df_f1_lang_movie_count.pkl')
-df_f2_movies_runtime = pd.read_pickle('./df_f2_movies_runtime.pkl')
-df_f3_collection_name_returns = pd.read_pickle('./df_f3_collection_name_returns.pkl')
-df_f4_production_countrys = pd.read_pickle('./df_f4_production_countrys.pkl')
-df_f5_production_companies_return = pd.read_pickle('./df_f5_production_companies_return.pkl')
-df_f6_df_expanded = pd.read_pickle('./df_f6_df_expanded.pkl')
-df_f6_get_director = pd.read_pickle('./df_f6_get_director.pkl')
-df_f7_one_hot_genres = pd.read_pickle('./df_f7_one_hot_genres.pkl')
+import requests
 
 #
+# URLs de los archivos Pickle en GitHub
+urls = [
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f1_lang_movie_count.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f2_movies_runtime.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f3_collection_name_returns.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f4_production_countrys.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f5_production_companies_return.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f6_df_expanded.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f6_get_director.pkl',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f7_one_hot_genres.pkl'
+]
 
+# Descargar y cargar los archivos Pickle
+dataframes = []
+for url in urls:
+    response = requests.get(url)
+    with open(url.split('/')[-1], 'wb') as f:
+        f.write(response.content)
+    dataframe = pd.read_pickle(url.split('/')[-1])
+    dataframes.append(dataframe)
+
+# Asignar los DataFrames a las variables correspondientes
+df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_f4_production_countrys, df_f5_production_companies_return, df_f6_df_expanded, df_f6_get_director, df_f7_one_hot_genres = dataframes
+
+# Ahora puedes usar los DataFrames en tu código
+#
 @app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma:str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo'''
@@ -41,7 +58,7 @@ def peliculas_idioma(idioma:str):
 
     return {'idioma':idioma, 'cantidad':count}
     
-
+peliculas_idioma('english')
 
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name:str):
@@ -63,7 +80,7 @@ def peliculas_duracion(movie_name:str):
         print(f"No se encontró la película: {movie_name}")
     return {'pelicula':movie_name, 'duracion':runtime, 'anio':year}
 
-
+peliculas_duracion('toy story')
 
 @app.get('/franquicia/{franquicia}')
 def franquicia(collection_name:str):
@@ -89,7 +106,7 @@ def franquicia(collection_name:str):
     print(f"La franquicia {collection_name} posee {cantidad_peliculas} películas, una ganancia total de {ganancia_total:.2f} y una ganancia promedio de {ganancia_promedio:.2f}, aproximadamente...")
     return {'franquicia':collection_name, 'cantidad':cantidad_peliculas, 'ganancia_total':ganancia_total, 'ganancia_promedio':ganancia_promedio}
 
-
+franquicia('pixar')
 
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais:str):
@@ -100,7 +117,7 @@ def peliculas_pais(pais:str):
     print(f"Se han producido {cantidad_peliculas} películas en {pais}.")
     return {'pais':pais, 'cantidad':cantidad_peliculas}
 
-
+peliculas_pais('argentina')
 
 @app.get('/productoras_exitosas/{productora}')
 def productoras_exitosas(productora:str):
@@ -118,7 +135,7 @@ def productoras_exitosas(productora:str):
     print(f"La productora '{productora}' ha tenido un return de {round(revenue_total, 2)} aproximadamente, es decir, que ha multiplicado sus budget_totales unas {round(revenue_total, 0)} veces haciendo peliculas y ha realizado {cant_movies} peliculas...")
     return {'productora':productora, 'revenue_total': revenue_total,'cantidad':cant_movies}
 
-
+productoras_exitosas('pixar')
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
@@ -159,6 +176,8 @@ def get_director(nombre_director: str):
                 'peliculas': flattened_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
                 'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula}
 
+get_director('quentin tarantino')
+
 
 # ML
 @app.get('/recomendacion/{reference_movie}')
@@ -188,3 +207,4 @@ def recomendacion(reference_movie:str, n=16, cutoff=0.5):
         print(f"No se encontró la película '{results['movie_reference']}'. ¿Quizás quisiste decir alguna de estas?")
         print(results['suggested_titles'])
    
+recomendacion('toy story')
