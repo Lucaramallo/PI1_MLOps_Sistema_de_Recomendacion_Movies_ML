@@ -144,7 +144,6 @@ def productoras_exitosas(productora: str):
 
     return response_dict
 
-
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
     ''' Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno.
@@ -155,16 +154,16 @@ def get_director(nombre_director: str):
         return {'mensaje': 'No encontramos el director en el set de datos...'}
     else:
         director_df_resume = df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director]
-        retorno_total_director = round(director_df_resume['director_return'].iloc[0])
+        retorno_total_director = int(round(director_df_resume['director_return'].iloc[0]))
 
         movies_titles = director_df_resume['title']
         flattened_titles = list(itertools.chain(*movies_titles))
 
         movies_release_date = director_df_resume['release_date']
 
-        retorno_total_movies = round(director_df_resume['return'].iloc[0])
-        budget_pelicula = round(director_df_resume['budget'].iloc[0])
-        revenue_pelicula = round(director_df_resume['revenue'].iloc[0])
+        retorno_total_movies = int(round(director_df_resume['return'].iloc[0]))
+        budget_pelicula = int(round(director_df_resume['budget'].iloc[0]))
+        revenue_pelicula = int(round(director_df_resume['revenue'].iloc[0]))
 
         peliculas_info = []
 
@@ -173,9 +172,9 @@ def get_director(nombre_director: str):
             movie_info = {
                 'title': movie,
                 'release_date': movie_search_df['release_date'].iloc[0],
-                'budget': movie_search_df['budget'].iloc[0],
-                'revenue': movie_search_df['revenue'].iloc[0],
-                'return': movie_search_df['return'].iloc[0].item()  # Convertir a tipo Python nativo
+                'budget': int(round(movie_search_df['budget'].iloc[0])),
+                'revenue': int(round(movie_search_df['revenue'].iloc[0])),
+                'return': int(round(movie_search_df['return'].iloc[0]))
             }
             peliculas_info.append(movie_info)
 
@@ -185,6 +184,7 @@ def get_director(nombre_director: str):
         }
 
         return response_dict
+
 
 
 
