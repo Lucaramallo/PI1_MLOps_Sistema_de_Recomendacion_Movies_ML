@@ -51,7 +51,7 @@ kiwisolver==1.4.4
 langcodes==3.3.0
 MarkupSafe==2.1.2
 marshmallow==3.13.0
-matplotlib==3.7.1
+matplotlib==3.5.3
 matplotlib-inline==0.1.6
 missingno==0.5.2
 multimethod==1.9.1
