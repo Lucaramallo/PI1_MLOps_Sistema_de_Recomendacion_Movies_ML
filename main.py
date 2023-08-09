@@ -10,21 +10,20 @@ import itertools
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
 
-df_f1_lang_movie_count = pd.read_pickle('./Datasets Cleaned & light/df_f1_lang_movie_count.pkl')
-df_f2_movies_runtime = pd.read_pickle('./Datasets Cleaned & light/df_f2_movies_runtime.pkl')
-df_f3_collection_name_returns = pd.read_pickle('./Datasets Cleaned & light/df_f3_collection_name_returns.pkl')
-df_f4_production_countrys = pd.read_pickle('./Datasets Cleaned & light/df_f4_production_countrys.pkl')
-df_f5_production_companies_return = pd.read_pickle('./Datasets Cleaned & light/df_f5_production_companies_return.pkl')
-df_f6_df_expanded = pd.read_pickle('./Datasets Cleaned & light/df_f6_df_expanded.pkl')
-df_f6_get_director = pd.read_pickle('./Datasets Cleaned & light/df_f6_get_director.pkl')
-df_f7_one_hot_genres = pd.read_pickle('./Datasets Cleaned & light/df_f7_one_hot_genres.pkl')
+df_f1_lang_movie_count = pd.read_pickle('./df_f1_lang_movie_count.pkl')
+df_f2_movies_runtime = pd.read_pickle('./df_f2_movies_runtime.pkl')
+df_f3_collection_name_returns = pd.read_pickle('./df_f3_collection_name_returns.pkl')
+df_f4_production_countrys = pd.read_pickle('./df_f4_production_countrys.pkl')
+df_f5_production_companies_return = pd.read_pickle('./df_f5_production_companies_return.pkl')
+df_f6_df_expanded = pd.read_pickle('./df_f6_df_expanded.pkl')
+df_f6_get_director = pd.read_pickle('./df_f6_get_director.pkl')
+df_f7_one_hot_genres = pd.read_pickle('./df_f7_one_hot_genres.pkl')
 
 #
 
 @app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma:str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo'''
-    
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
     count = int()
     if not filtered_df.empty:
