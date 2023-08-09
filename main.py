@@ -3,11 +3,12 @@
 # Define your routes and other FastAPI configurations here
 
 from typing import Union
+from fastapi import FastAPI
+app = FastAPI()
 import pandas as pd
 import itertools
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
-from fastapi import FastAPI
 
 df_f1_lang_movie_count = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f1_lang_movie_count.pkl')
 df_f2_movies_runtime = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f2_movies_runtime.pkl')
@@ -18,7 +19,7 @@ df_f6_df_expanded = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_
 df_f6_get_director = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f6_get_director.pkl')
 df_f7_one_hot_genres = pd.read_pickle('CURSADO HENRY DTS09\PI PT02 - Def\PI1_MLOps_Sistema_de_Recomendacion_Movies_ML\Datasets Cleaned & light\df_f7_one_hot_genres.pkl')
 
-app = FastAPI()
+
 
 @app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma:str):
