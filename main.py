@@ -77,17 +77,15 @@ def peliculas_duracion(movie_name: str):
 
     return response_dict
 
-
-@app.get('/franquicia/{franquicia}')
-def franquicia(collection_name:str):
+@app.get('/franquicia/{collection_name}')
+def franquicia(collection_name: str):
     '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio'''
     # Filtrar los datos en función del valor de la columna 'collection_name'
     df_return = df_f3_collection_name_returns[df_f3_collection_name_returns['collection_name'] == collection_name]
 
     # Verificar si la colección fue encontrada
     if df_return.empty:
-        print(f"No se encontró la colección '{collection_name}' en el dataframe.")
-        return None
+        return f"No se encontró la colección '{collection_name}' en el dataframe."
 
     # Calcular la cantidad de películas
     cantidad_peliculas = df_return['id_list'].apply(len).sum()
@@ -101,9 +99,9 @@ def franquicia(collection_name:str):
     # Crear el diccionario de respuesta
     response_dict = {
         'franquicia': collection_name,
-        'cantidad': cantidad_peliculas,
-        'ganancia_total': ganancia_total,
-        'ganancia_promedio': ganancia_promedio
+        'cantidad': cantidad_peliculas.item(),
+        'ganancia_total': ganancia_total.item(),
+        'ganancia_promedio': ganancia_promedio.item()
     }
 
     return response_dict
