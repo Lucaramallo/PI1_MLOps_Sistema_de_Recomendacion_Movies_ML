@@ -4,6 +4,7 @@
 
 from typing import Union
 from fastapi import FastAPI
+import pickle
 app = FastAPI()
 import pandas as pd
 import itertools
