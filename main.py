@@ -38,10 +38,13 @@ for url in urls:
 # Asignar los DataFrames a las variables correspondientes
 df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_f4_production_countrys, df_f5_production_companies_return, df_f6_df_expanded, df_f6_get_director, df_f7_one_hot_genres = dataframes
 
+
+
 # Ahora @app.get('/peliculas_idioma/{idioma}')
 @app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma: str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo'''
+    idioma = idioma.lower()
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
     count = 0  # Inicializar la variable count como 0
     
@@ -53,10 +56,12 @@ def peliculas_idioma(idioma: str):
     else:
         return {'idioma': idioma, 'cantidad': 0}  # Asegurarse de devolver un valor válido
 
+
+
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name: str):
     '''Ingresas la pelicula, retornando la duracion y el año'''
-
+    movie_name = movie_name.lower()
     # Filtrar el DataFrame para obtener la fila que corresponde al nombre de la película proporcionado
     filtered_df = df_f2_movies_runtime[df_f2_movies_runtime['title'] == movie_name]
 
@@ -80,6 +85,7 @@ def peliculas_duracion(movie_name: str):
 @app.get('/franquicia/{collection_name}')
 def franquicia(collection_name: str):
     '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio'''
+    collection_name = collection_name.lower()
     # Filtrar los datos en función del valor de la columna 'collection_name'
     df_return = df_f3_collection_name_returns[df_f3_collection_name_returns['collection_name'] == collection_name]
 
@@ -109,6 +115,7 @@ def franquicia(collection_name: str):
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais: str):
     '''Ingresas el pais, retornando la cantidad de peliculas producidas en el mismo'''
+    pais = pais.lower()
     # Contar las películas producidas en el país proporcionado (teniendo en cuenta las listas de valores)
     cantidad_peliculas = df_f4_production_countrys.apply(lambda x: pais.lower() in x).sum()
 
@@ -124,6 +131,7 @@ def peliculas_pais(pais: str):
 @app.get('/productoras_exitosas/{productora}')
 def productoras_exitosas(productora: str):
     '''Ingresas la productora, entregandote el revunue total y la cantidad de peliculas que realizo '''
+    productora = productora.lower()
     # Filtrar el dataframe para obtener los datos de la productora deseada
     productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(productora, case=False, na=False)]
 
