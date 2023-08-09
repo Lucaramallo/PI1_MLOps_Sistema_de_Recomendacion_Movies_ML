@@ -55,7 +55,7 @@ def peliculas_idioma(idioma: str):
     else:
         return {'idioma': idioma, 'cantidad': 0}  # Asegurarse de devolver un valor válido
 
-
+peliculas_idioma('english')
 
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name: str):
@@ -81,6 +81,9 @@ def peliculas_duracion(movie_name: str):
 
     return response_dict
 
+peliculas_duracion('toy story')
+
+
 @app.get('/franquicia/{collection_name}')
 def franquicia(collection_name: str):
     '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio'''
@@ -104,12 +107,15 @@ def franquicia(collection_name: str):
     # Crear el diccionario de respuesta
     response_dict = {
         'franquicia': collection_name,
-        'cantidad': cantidad_peliculas.item(),
-        'ganancia_total': ganancia_total.item(),
-        'ganancia_promedio': ganancia_promedio.item()
+        'cantidad': cantidad_peliculas,
+        'ganancia_total': ganancia_total,
+        'ganancia_promedio': ganancia_promedio
     }
 
     return response_dict
+
+
+franquicia('toy story collection')
 
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais: str):
@@ -126,30 +132,36 @@ def peliculas_pais(pais: str):
 
     return response_dict
 
+peliculas_pais('argentina')
 
-@app.get('/productoras_exitosas/{productora}')
-def productoras_exitosas(productora: str):
-    '''Ingresas la productora, entregandote el revunue total y la cantidad de peliculas que realizo '''
-    
-    # Filtrar el dataframe para obtener los datos de la productora deseada
-    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(productora, case=False, na=False)]
+@app.get('/productoras_exitosas/{production_company}')
+def productoras_exitosas(production_company: str):
+    '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total'''
 
-    # Verificar si la productora existe en el dataframe
-    if productora_data.empty:
-        return {'mensaje': f"La productora '{productora}' no fue encontrada en el dataframe."}
+    # Filtrar los datos en función del valor de la columna 'production_company'
+    df_return = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'] == production_company]
 
-    # Calcular el revenue total de la productora
-    revenue_total = round(productora_data['return_per_company'].sum())
-    cant_movies = productora_data['count_movies'].sum()
+    # Verificar si la productora fue encontrada
+    if df_return.empty:
+        return f"No se encontró la productora '{production_company}' en el dataframe."
+
+    # Calcular el promedio de ganancias
+    revenue_mean = round(df_return['return_mean'].mean())
+
+    # Calcular la ganancia total
+    revenue_total = round(df_return['return_sum'].sum())
 
     # Crear el diccionario de respuesta
     response_dict = {
-        'productora': productora,
-        'revenue_total': revenue_total.item(),
-        'cantidad': cant_movies.item()
+        'productora': production_company,
+        'revenue_mean': revenue_mean,
+        'revenue_total': revenue_total
     }
 
     return response_dict
+
+
+productoras_exitosas('pixar')
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
@@ -166,24 +178,20 @@ def get_director(nombre_director: str):
         movies_titles = director_df_resume['title']
         flattened_titles = list(itertools.chain(*movies_titles))
 
-        movies_release_date = director_df_resume['release_date']
-
-        retorno_total_movies = int(round(director_df_resume['return'].iloc[0]))
-        budget_pelicula = int(round(director_df_resume['budget'].iloc[0]))
-        revenue_pelicula = int(round(director_df_resume['revenue'].iloc[0]))
-
         peliculas_info = []
 
         for movie in flattened_titles:
             movie_search_df = df_f6_df_expanded[df_f6_df_expanded['title'] == movie]
-            movie_info = {
-                'title': movie,
-                'release_date': movie_search_df['release_date'].iloc[0],
-                'budget': int(round(movie_search_df['budget'].iloc[0])),
-                'revenue': int(round(movie_search_df['revenue'].iloc[0])),
-                'return': int(round(movie_search_df['return'].iloc[0]))
-            }
-            peliculas_info.append(movie_info)
+            
+            if not movie_search_df.empty:
+                movie_info = {
+                    'title': movie,
+                    'release_date': movie_search_df['release_date'].iloc[0],
+                    'budget': int(round(movie_search_df['budget'].iloc[0])),
+                    'revenue': int(round(movie_search_df['revenue'].iloc[0])),
+                    'return': int(round(movie_search_df['return'].iloc[0]))
+                }
+                peliculas_info.append(movie_info)
 
         response_dict = {
             'retorno_total_director': retorno_total_director,
@@ -192,6 +200,9 @@ def get_director(nombre_director: str):
 
         return response_dict
 
+
+
+get_director('quentin tarantino')
 
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
@@ -212,3 +223,4 @@ def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
         results['suggested_titles'] = similar_titles
 
     return results
+recomendacion('toy story')
