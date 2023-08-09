@@ -38,29 +38,20 @@ for url in urls:
 # Asignar los DataFrames a las variables correspondientes
 df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_f4_production_countrys, df_f5_production_companies_return, df_f6_df_expanded, df_f6_get_director, df_f7_one_hot_genres = dataframes
 
-# Ahora puedes usar los DataFrames en tu código
-#
-@app.get('/peliculas_idioma/{idioma}')
+# Ahora @app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma: str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo'''
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
-    count = int()
+    count = 0  # Inicializar la variable count como 0
+    
     if not filtered_df.empty:
-        # Obtener los valores del iso_language_code y el conteo
-        iso_language_code = filtered_df['iso_language_code'].values[0]
-        count = filtered_df['count'].values[0]
-
-        # Crear el diccionario de respuesta
-        response_dict = {
-            'idioma': idioma,
-            'iso_language_code': iso_language_code,
-            'cantidad': count
-        }
+        count = filtered_df['count'].values[0].item()  # Convertir a tipo nativo de Python
+    
+    if count > 0:
+        return {'idioma': idioma, 'cantidad': count}
     else:
-        # Si no se encuentra el idioma en el DataFrame, retornar un diccionario vacío
-        response_dict = {}
+        return {'idioma': idioma, 'cantidad': 0}  # Asegurarse de devolver un valor válido
 
-    return response_dict
 
 
 
