@@ -44,6 +44,7 @@ df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_
 @app.get('/peliculas_idioma/{idioma}')
 def peliculas_idioma(idioma: str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo'''
+    idioma = idioma.lower()
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
     count = 0  # Inicializar la variable count como 0
     
@@ -60,7 +61,7 @@ def peliculas_idioma(idioma: str):
 @app.get('/peliculas_duracion/{movie_name}')
 def peliculas_duracion(movie_name: str):
     '''Ingresas la pelicula, retornando la duracion y el año'''
-
+    movie_name = movie_name.lower()
     # Filtrar el DataFrame para obtener la fila que corresponde al nombre de la película proporcionado
     filtered_df = df_f2_movies_runtime[df_f2_movies_runtime['title'] == movie_name]
 
@@ -86,7 +87,8 @@ def peliculas_duracion(movie_name: str):
 @app.get('/franquicia/{collection_name}')
 def franquicia(collection_name: str):
     '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio'''
-    
+    collection_name = collection_name.lower()
+
     # Filtrar los datos en función del valor de la columna 'collection_name'
     df_return = df_f3_collection_name_returns[df_f3_collection_name_returns['collection_name'] == collection_name]
 
@@ -138,7 +140,7 @@ def peliculas_pais(pais: str):
 @app.get('/productoras_exitosas/{production_company}')
 def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total'''
-
+    production_company = production_company.lower()
     # Filtrar el dataframe para obtener los datos de la productora deseada
     productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False, na=False)]
 
@@ -168,7 +170,8 @@ def get_director(nombre_director: str):
     ''' Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno.
     Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma. En formato lista'''
     # Convertir el valor a minúsculas
-    
+    nombre_director = nombre_director.lower()
+
     if df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director].empty:
         return {'mensaje': 'No encontramos el director en el set de datos...'}
     else:
@@ -208,7 +211,7 @@ def get_director(nombre_director: str):
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
     '''Ingresas un nombre de película y te recomienda las similares en una lista'''
     results = {'movie_reference': reference_movie}
-    
+    reference_movie = reference_movie.lower()
     
     if reference_movie in df_f7_one_hot_genres['title'].values:
         reference_row = df_f7_one_hot_genres[df_f7_one_hot_genres['title'] == reference_movie].iloc[:, 1:]
