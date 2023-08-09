@@ -123,8 +123,9 @@ def peliculas_pais(pais: str):
     # Convert the country name to lowercase for case-insensitive matching
     pais = pais.lower()
     
-    # Filter the DataFrame based on the provided country name
-    count = df_f4_production_countrys[df_f4_production_countrys['country_names'].str.contains(pais)].count()
+    # Filter out rows with missing values in the 'country_names' column, then use .str.contains()
+    filtered_df = df_f4_production_countrys.dropna(subset=['country_names'])
+    count = filtered_df[filtered_df['country_names'].str.contains(pais, case=False)].shape[0]
     
     # Create the response dictionary
     response_dict = {
