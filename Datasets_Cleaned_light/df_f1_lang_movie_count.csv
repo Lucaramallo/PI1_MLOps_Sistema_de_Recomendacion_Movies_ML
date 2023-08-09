@@ -1,134 +1,134 @@
 iso_language_code,count,language_name
-en,30814,English
-fr,4779,French
-ja,3516,Japanese
-ru,3126,Russian
-de,3098,German
-es,2674,Spanish; Castilian
-it,2586,Italian
-zh,1580,Chinese
-hi,1412,Hindi
-ko,1084,Korean
-cn,946,
-ar,682,Arabic
-pl,660,Polish
-pt,646,Portuguese
-sv,607,Swedish
-cs,568,Czech
-hu,433,Hungarian
-he,430,Hebrew
-el,426,"Greek, Modern (1453-)"
-fi,399,Finnish
-nl,366,Dutch; Flemish
-th,350,Thai
-tr,336,Turkish
-da,329,Danish
-xx,327,
-fa,284,Persian
-ro,256,Romanian; Moldavian; Moldovan
-ta,222,Tamil
-no,184,Norwegian
-la,170,Latin
-te,136,Telugu
-sr,135,Serbian
-vi,122,Vietnamese
-ur,110,Urdu
-uk,106,Ukrainian
-bn,94,Bengali
-yi,90,Yiddish
-is,69,Icelandic
-tl,67,Tagalog
-ka,66,Georgian
-et,65,Estonian
-bg,64,Bulgarian
-hr,62,Croatian
-ml,54,Malayalam
-mr,53,Marathi
-sk,50,Slovak
-sl,44,Slovenian
-id,42,Indonesian
-ca,41,Catalan; Valencian
-sq,38,Albanian
-bs,38,Bosnian
-lt,38,Lithuanian
-pa,36,Panjabi; Punjabi
-sh,31,
-lv,29,Latvian
-ku,28,Kurdish
-af,28,Afrikaans
-sw,28,Swahili
-ms,26,Malay
-hy,24,Armenian
-bo,24,Tibetan
-gd,24,Gaelic; Scottish Gaelic
-ga,23,Irish
-kk,22,Kazakh
-ce,20,Chechen
-zu,19,Zulu
-wo,18,Wolof
-eu,17,Basque
-mn,17,Mongolian
-ps,16,Pushto; Pashto
-km,15,Central Khmer
-mk,14,Macedonian
-xh,14,Xhosa
-mi,13,Maori
-cy,11,Welsh
-so,11,Somali
-ne,11,Nepali
-gu,10,Gujarati
-am,10,Amharic
-iu,9,Inuktitut
-qu,9,Quechua
-my,8,Burmese
-eo,8,Esperanto
-az,8,Azerbaijani
-nv,8,Navajo; Navaho
-bm,7,Bambara
-ky,7,Kirghiz; Kyrgyz
-gn,7,Guarani
-ln,7,Lingala
-tt,6,Tatar
-cr,5,Cree
-tg,5,Tajik
-lo,5,Lao
-sa,5,Sanskrit
-gl,5,Galician
-oc,4,Occitan (post 1500)
-si,4,Sinhala; Sinhalese
-kn,4,Kannada
-lb,4,Luxembourgish; Letzeburgesch
-mt,4,Maltese
-se,4,Northern Sami
-be,4,Belarusian
-rw,3,Kinyarwanda
-co,3,Corsican
-uz,3,Uzbek
-jv,3,Javanese
-nb,3,"Bokmål, Norwegian; Norwegian Bokmål"
-ny,3,Chichewa; Chewa; Nyanja
-st,3,"Sotho, Southern"
-ay,3,Aymara
-ab,2,Abkhazian
-tn,2,Tswana
-ug,2,Uighur; Uyghur
-as,2,Assamese
-ff,2,Fulah
-dz,2,Dzongkha
-sc,2,Sardinian
-mh,2,Marshallese
-br,1,Breton
-sg,1,Sango
-ht,1,Haitian; Haitian Creole
-fy,1,Western Frisian
-to,1,Tonga (Tonga Islands)
-tk,1,Turkmen
-sm,1,Samoan
-ki,1,Kikuyu; Gikuyu
-kw,1,Cornish
-fo,1,Faroese
-sn,1,Shona
-bi,1,Bislama
-ha,1,Hausa
-ig,1,Igbo
-ty,1,Tahitian
+en,30814,english
+fr,4779,french
+ja,3516,japanese
+ru,3126,russian
+de,3098,german
+es,2674,spanish; castilian
+it,2586,italian
+zh,1580,chinese
+hi,1412,hindi
+ko,1084,korean
+cn,946,nan
+ar,682,arabic
+pl,660,polish
+pt,646,portuguese
+sv,607,swedish
+cs,568,czech
+hu,433,hungarian
+he,430,hebrew
+el,426,"greek, modern (1453-)"
+fi,399,finnish
+nl,366,dutch; flemish
+th,350,thai
+tr,336,turkish
+da,329,danish
+xx,327,nan
+fa,284,persian
+ro,256,romanian; moldavian; moldovan
+ta,222,tamil
+no,184,norwegian
+la,170,latin
+te,136,telugu
+sr,135,serbian
+vi,122,vietnamese
+ur,110,urdu
+uk,106,ukrainian
+bn,94,bengali
+yi,90,yiddish
+is,69,icelandic
+tl,67,tagalog
+ka,66,georgian
+et,65,estonian
+bg,64,bulgarian
+hr,62,croatian
+ml,54,malayalam
+mr,53,marathi
+sk,50,slovak
+sl,44,slovenian
+id,42,indonesian
+ca,41,catalan; valencian
+sq,38,albanian
+bs,38,bosnian
+lt,38,lithuanian
+pa,36,panjabi; punjabi
+sh,31,nan
+lv,29,latvian
+ku,28,kurdish
+af,28,afrikaans
+sw,28,swahili
+ms,26,malay
+hy,24,armenian
+bo,24,tibetan
+gd,24,gaelic; scottish gaelic
+ga,23,irish
+kk,22,kazakh
+ce,20,chechen
+zu,19,zulu
+wo,18,wolof
+eu,17,basque
+mn,17,mongolian
+ps,16,pushto; pashto
+km,15,central khmer
+mk,14,macedonian
+xh,14,xhosa
+mi,13,maori
+cy,11,welsh
+so,11,somali
+ne,11,nepali
+gu,10,gujarati
+am,10,amharic
+iu,9,inuktitut
+qu,9,quechua
+my,8,burmese
+eo,8,esperanto
+az,8,azerbaijani
+nv,8,navajo; navaho
+bm,7,bambara
+ky,7,kirghiz; kyrgyz
+gn,7,guarani
+ln,7,lingala
+tt,6,tatar
+cr,5,cree
+tg,5,tajik
+lo,5,lao
+sa,5,sanskrit
+gl,5,galician
+oc,4,occitan (post 1500)
+si,4,sinhala; sinhalese
+kn,4,kannada
+lb,4,luxembourgish; letzeburgesch
+mt,4,maltese
+se,4,northern sami
+be,4,belarusian
+rw,3,kinyarwanda
+co,3,corsican
+uz,3,uzbek
+jv,3,javanese
+nb,3,"bokmål, norwegian; norwegian bokmål"
+ny,3,chichewa; chewa; nyanja
+st,3,"sotho, southern"
+ay,3,aymara
+ab,2,abkhazian
+tn,2,tswana
+ug,2,uighur; uyghur
+as,2,assamese
+ff,2,fulah
+dz,2,dzongkha
+sc,2,sardinian
+mh,2,marshallese
+br,1,breton
+sg,1,sango
+ht,1,haitian; haitian creole
+fy,1,western frisian
+to,1,tonga (tonga islands)
+tk,1,turkmen
+sm,1,samoan
+ki,1,kikuyu; gikuyu
+kw,1,cornish
+fo,1,faroese
+sn,1,shona
+bi,1,bislama
+ha,1,hausa
+ig,1,igbo
+ty,1,tahitian
