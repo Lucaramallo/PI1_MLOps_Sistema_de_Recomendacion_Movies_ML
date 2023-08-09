@@ -142,14 +142,14 @@ def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total'''
     production_company = production_company.lower()
     # Filtrar el dataframe para obtener los datos de la productora deseada
-    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False, na=False)]
+    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'] == production_company]
 
     # Verificar si la productora existe en el dataframe
     if productora_data.empty:
         return f"La productora '{production_company}' no fue encontrada en el dataframe."
 
     # Calcular el revenue total de la productora
-    revenue_total = productora_data['return_per_company'].sum()
+    revenue_total = round(productora_data['return_per_company'].sum())
     cant_movies = productora_data['count_movies'].sum()
     
     
@@ -159,7 +159,7 @@ def productoras_exitosas(production_company: str):
         'revenue_total': revenue_total,
         'cant_movies': cant_movies
     }
-
+    # print(response_dict)
     return response_dict
 
 
