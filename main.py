@@ -91,10 +91,10 @@ def franquicia(collection_name: str):
     cantidad_peliculas = df_return['id_list'].apply(len).sum()
 
     # Calcular la ganancia total
-    ganancia_total = df_return['return_sum'].sum()
+    ganancia_total = round(df_return['return_sum'].sum())
 
     # Calcular la ganancia promedio
-    ganancia_promedio = df_return['return_mean'].mean()
+    ganancia_promedio = round(df_return['return_mean'].mean())
 
     # Crear el diccionario de respuesta
     response_dict = {
@@ -106,9 +106,8 @@ def franquicia(collection_name: str):
 
     return response_dict
 
-
 @app.get('/peliculas_pais/{pais}')
-def peliculas_pais(pais:str):
+def peliculas_pais(pais: str):
     '''Ingresas el pais, retornando la cantidad de peliculas producidas en el mismo'''
     # Contar las películas producidas en el país proporcionado (teniendo en cuenta las listas de valores)
     cantidad_peliculas = df_f4_production_countrys.apply(lambda x: pais.lower() in x).sum()
@@ -116,10 +115,11 @@ def peliculas_pais(pais:str):
     # Crear el diccionario de respuesta
     response_dict = {
         'pais': pais,
-        'cantidad': cantidad_peliculas
+        'cantidad': cantidad_peliculas.item()
     }
 
     return response_dict
+
 
 
 @app.get('/productoras_exitosas/{productora}')
