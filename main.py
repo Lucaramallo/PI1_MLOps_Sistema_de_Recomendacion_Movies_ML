@@ -16,23 +16,23 @@ from difflib import get_close_matches
 #
 # URLs de los archivos Pickle en GitHub
 urls = [
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f1_lang_movie_count.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f2_movies_runtime.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f3_collection_name_returns.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f4_production_countrys.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f5_production_companies_return.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f6_df_expanded.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f6_get_director.pkl',
-    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f7_one_hot_genres.pkl'
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f1_lang_movie_count.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f2_movies_runtime.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f3_collection_name_returns.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f4_production_countrys.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f5_production_companies_return.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f6_df_expanded.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f6_get_director.csv',
+    'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f7_one_hot_genres.csv'
 ]
 
-# Descargar y cargar los archivos Pickle
+# Descargar y cargar los archivos CSV
 dataframes = []
 for url in urls:
     response = requests.get(url)
     with open(url.split('/')[-1], 'wb') as f:
         f.write(response.content)
-    dataframe = pd.read_pickle(url.split('/')[-1])
+    dataframe = pd.read_csv(url.split('/')[-1])
     dataframes.append(dataframe)
 
 # Asignar los DataFrames a las variables correspondientes
