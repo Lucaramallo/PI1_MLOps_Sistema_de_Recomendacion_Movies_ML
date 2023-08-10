@@ -213,7 +213,7 @@ def get_director(nombre_director: str):
 
         for movie in flattened_titles:
             movie_search_df = df_f6_df_expanded[df_f6_df_expanded['title'] == movie]
-            lista_movie_b_r_r = movie_search_df[['title', 'release_date', 'budget', 'revenue', 'return']].to_records(index=False)
+            lista_movie_b_r_r = movie_search_df[['title', 'release_date', 'budget', 'revenue', 'return']].to_dict()
             # print(f'Listado de informacion peliculas para el director {nombre_director}')
             # print(f'retorno_total_director: {retorno_total_director}')
             # print(f'Listado de peliculas: {flattened_titles}')
@@ -224,11 +224,10 @@ def get_director(nombre_director: str):
             # print(f'listado de info movies: {lista_movie_b_r_r}')
         
         dict_rta =  {'director': nombre_director, 'retorno_total_director': retorno_total_director, 
-                'peliculas': movies_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
+                'peliculas': flattened_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
                 'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula, 'listado_de_info_movies': lista_movie_b_r_r}
-        # print(dict_rta)
         return(dict_rta)
-
+       
 
 # get_director('quentin tarantino')
 
