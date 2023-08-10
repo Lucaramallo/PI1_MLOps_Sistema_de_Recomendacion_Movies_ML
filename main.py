@@ -43,13 +43,19 @@ df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_
 # Ahora @app.get('/peliculas_idioma/{idioma}') 
 @app.get('/peliculas_idioma/{idioma}') # ok
 def peliculas_idioma(idioma: str):
-    '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo, 
-    language_name
-    english
-    french
-    japanese
-    nota: Los valores de los idiomas deben ser insertados en ingles, ya que se descargo un set de datos extra on los ISO_languages registrados.
-    fuente: " https://datahub.io/core/language-codes ".  '''
+    '''
+    
+     Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo:<br>
+    - language_name<br>
+    - english<br>
+    - french<br>
+    - spanish; castilian<br>
+    - japanese<br>
+    Nota: Los valores de los idiomas deben ser insertados en inglés, ya que<br>
+    se descargó un set de datos extra con los ISO_languages registrados. spanish; castilian como son el mismo idioma se encuentran ambos insertando: spanish; castilian<br>
+    Fuente: <a href='https://datahub.io/core/language-codes'>https://datahub.io/core/language-codes</a>
+    
+    '''
     idioma = idioma.lower()
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
     count = 0  # Inicializar la variable count como 0
@@ -66,8 +72,8 @@ def peliculas_idioma(idioma: str):
 
 @app.get('/peliculas_duracion/{movie_name}') # ok
 def peliculas_duracion(movie_name: str):
-    '''Ingresas la pelicula, retornando la duracion y el año. 
-    
+    '''Ingresas la pelicula, retornando la duracion y el año.<br> 
+    <br>
     ej, pulp fiction'''
     movie_name = movie_name.lower()
     # Filtrar el DataFrame para obtener la fila que corresponde al nombre de la película proporcionado
@@ -94,8 +100,8 @@ def peliculas_duracion(movie_name: str):
 
 @app.get('/franquicia/{collection_name}') # ok
 def franquicia(collection_name: str):
-    '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio. 
-    
+    '''Se ingresa la franquicia, retornando la cantidad de peliculas, ganancia total y promedio. <br>
+    <br>
     ej, toy story collection'''
     collection_name = collection_name.lower()
 
@@ -129,8 +135,8 @@ def franquicia(collection_name: str):
 
 @app.get('/peliculas_pais/{pais}')
 def peliculas_pais(pais: str):
-    '''Ingresas el país, retornando la cantidad de películas producidas en el mismo. 
-    
+    '''Ingresas el país, retornando la cantidad de películas producidas en el mismo. <br>
+    <br>
     
     ej argentina'''
     # Convert the country name to lowercase for case-insensitive matching
@@ -154,9 +160,9 @@ def peliculas_pais(pais: str):
 
 @app.get('/productoras_exitosas/{production_company}')
 def productoras_exitosas(production_company: str):
-    '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total, 
+    '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total, <br>
     
-    
+    <br>
     ej pixar'''
     production_company = production_company.lower()
 
@@ -185,19 +191,19 @@ def productoras_exitosas(production_company: str):
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
-    '''Se ingresa un nombre de algun director, retornando:
-
-            Listado de informacion peliculas del director
-            Listado de informacion peliculas del director
-            retorno total del director
-            Listado de peliculas
-            Listado de fechas para las peliculas retornadas
-            Listado de Returns para las peliculas retornadas
-            Listado de Revenues para las peliculas retornadas 
-            Listado de Budgets para las peliculas retornadas
-            listado de info movies: Contiene todo lo anterior en un solo listado
-
-            ej, Quentin Tarantino
+    '''Se ingresa un nombre de algun director, retornando:<br>
+<br>
+            Listado de informacion peliculas del director<br>
+            Listado de informacion peliculas del director<br>
+            retorno total del director<br>
+            Listado de peliculas<br>
+            Listado de fechas para las peliculas retornadas<br>
+            Listado de Returns para las peliculas retornadas<br>
+            Listado de Revenues para las peliculas retornadas <br>
+            Listado de Budgets para las peliculas retornadas<br>
+            listado de info movies: Contiene todo lo anterior en un solo listado<br>
+<br>
+            ej, Quentin Tarantino<br>
     '''
     nombre_director = nombre_director.lower()
     if df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director].empty:
@@ -237,9 +243,9 @@ def get_director(nombre_director: str):
 
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
-    '''Ingresas un nombre de película y te recomienda las similares en una lista
-    n = parametro opcional = cantidad de recomendaciones que se quiere
-    cutoff = % para recomendar con titulos similares en caso de no encontrar el titulo insertado. 
+    '''Ingresas un nombre de película y te recomienda las similares en una lista<br>
+    n = parametro opcional = cantidad de recomendaciones que se quiere<br>
+    cutoff = % para recomendar con titulos similares en caso de no encontrar el titulo insertado. <br>
     ej toy story'''
      
     results = {'movie_reference': reference_movie}
