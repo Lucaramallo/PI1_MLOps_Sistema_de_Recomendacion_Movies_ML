@@ -161,7 +161,7 @@ def productoras_exitosas(production_company: str):
         'revenue_total': revenue_total,
         'cant_movies': cant_movies
     }
-    print(response_dict)
+    
     return response_dict
 
 # productoras_exitosas('pixar')
