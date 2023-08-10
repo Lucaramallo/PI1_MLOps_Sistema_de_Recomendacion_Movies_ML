@@ -26,7 +26,7 @@ urls = [
     'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f7_one_hot_genres.csv'
 ]
 
-# Descargar y cargar los archivos CSV
+# Descargar y cargar los archivos CSVS
 dataframes = []
 for url in urls:
     response = requests.get(url)
