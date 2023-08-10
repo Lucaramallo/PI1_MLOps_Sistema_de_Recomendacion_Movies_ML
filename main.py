@@ -139,20 +139,15 @@ def peliculas_pais(pais: str):
 # peliculas_pais('argentina')
 
 
+
 @app.get('/productoras_exitosas/{production_company}')
 def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total, ej pixar'''
     production_company = production_company.lower()
-    
-    # Print the production company name to debug and make sure it's properly received
-    #print("Production Company:", production_company)
-    
+
     # Filter the DataFrame to get data for the desired production company
-    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False,)]
-    
-    # Print the filtered DataFrame for debugging
-    #print("Filtered DataFrame:\n", productora_data)
-    
+    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False)]
+
     # Verificar si la productora existe en el dataframe
     if productora_data.empty:
         return f"La productora '{production_company}' no fue encontrada en el dataframe."
@@ -160,17 +155,17 @@ def productoras_exitosas(production_company: str):
     # Calcular el revenue total de la productora
     revenue_total = productora_data['return_per_company'].sum()
     cant_movies = productora_data['count_movies'].sum()
-    
+
     # Crear el diccionario de respuesta
     response_dict = {
-        'productora': productora_data['production_companies_nombres'],
+        'productora': productora_data['production_companies_nombres'].values[0],  # Tomar el nombre de la productora
         'revenue_total': revenue_total,
         'cant_movies': cant_movies
     }
-
+    print(response_dict)
     return response_dict
 
-# productoras_exitosas('pixar')
+productoras_exitosas('pixar')
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
