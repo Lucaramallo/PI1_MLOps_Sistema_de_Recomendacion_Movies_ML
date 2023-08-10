@@ -239,6 +239,7 @@ def get_director(nombre_director: str):
         return(dict_rta)
        
 
+
 # get_director('quentin tarantino')
 
 @app.get('/recomendacion/{reference_movie}')
