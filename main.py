@@ -4,7 +4,6 @@
 
 from typing import Union
 from fastapi import FastAPI
-import pickle
 app = FastAPI()
 import pandas as pd
 import itertools
@@ -12,6 +11,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
 import requests
 from difflib import get_close_matches
+import ast
 
 # URLs de los archivos Pickle en GitHub
 urls = [
@@ -167,13 +167,11 @@ def productoras_exitosas(production_company: str):
 
 
 @app.get('/get_director/{nombre_director}')
-def get_director(nombre_director):
+def get_director(nombre_director: str):
     nombre_director = nombre_director.lower()
     if df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director].empty:
-        print('No encontramos el director en el set de datos...')
-        return None
+        return {'mensaje': 'No encontramos el director en el set de datos...'}
     else:
-
         director_df_resume = df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director]
         retorno_total_director = round(director_df_resume['director_return'].iloc[0])
         
@@ -189,19 +187,22 @@ def get_director(nombre_director):
         for movie in flattened_titles:
             movie_search_df = df_f6_df_expanded[df_f6_df_expanded['title'] == movie]
             lista_movie_b_r_r = movie_search_df[['title', 'release_date', 'budget', 'revenue', 'return']].to_records(index=False)
-            # print(f'Listado de info peliculas para el director {nombre_director}')
+            # print(f'Listado de informacion peliculas para el director {nombre_director}')
             # print(f'retorno_total_director: {retorno_total_director}')
             # print(f'Listado de peliculas: {flattened_titles}')
             # print(f'Listado de fechas para las peliculas retornadas: {movies_release_date}')
             # print(f'Listado de Returns para las peliculas retornadas: {retorno_total_movies}')
             # print(f'Listado de Revenues para las peliculas retornadas: {revenue_pelicula}')
             # print(f'Listado de Budgets para las peliculas retornadas: {budget_pelicula}')
-            
+            # print(f'listado de info movies: {lista_movie_b_r_r}')
         
-        return {'director': nombre_director, 'retorno_total_director': retorno_total_director, 
+        dict_rta =  {'director': nombre_director, 'retorno_total_director': retorno_total_director, 
                 'peliculas': flattened_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
-                'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula}
+                'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula, 'listado_de_info_movies': lista_movie_b_r_r}
+        return dict_rta
 
+
+get_director('quentin tarantino')
 
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
