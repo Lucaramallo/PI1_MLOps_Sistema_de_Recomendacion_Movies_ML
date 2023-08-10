@@ -39,6 +39,7 @@ df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_
 
 
 
+
 # Ahora @app.get('/peliculas_idioma/{idioma}') 
 @app.get('/peliculas_idioma/{idioma}') # ok
 def peliculas_idioma(idioma: str):
