@@ -13,7 +13,6 @@ from difflib import get_close_matches
 import requests
 from difflib import get_close_matches
 
-#
 # URLs de los archivos Pickle en GitHub
 urls = [
     'https://github.com/Lucaramallo/PI1_MLOps_Sistema_de_Recomendacion_Movies_ML/raw/main/Datasets_Cleaned_light/df_f1_lang_movie_count.csv',
@@ -168,46 +167,41 @@ def productoras_exitosas(production_company: str):
 
 
 @app.get('/get_director/{nombre_director}')
-def get_director(nombre_director: str):
-    ''' Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno.
-    Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma. En formato lista'''
-    # Convertir el valor a minúsculas
+def get_director(nombre_director):
     nombre_director = nombre_director.lower()
-
     if df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director].empty:
-        return {'mensaje': 'No encontramos el director en el set de datos...'}
+        print('No encontramos el director en el set de datos...')
+        return None
     else:
-        director_df_resume = df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director]
-        retorno_total_director = int(round(director_df_resume['director_return'].iloc[0]))
 
+        director_df_resume = df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director]
+        retorno_total_director = round(director_df_resume['director_return'].iloc[0])
+        
         movies_titles = director_df_resume['title']
         flattened_titles = list(itertools.chain(*movies_titles))
 
-        peliculas_info = []
+        movies_release_date = director_df_resume['release_date']
+
+        retorno_total_movies = round(director_df_resume['return'].iloc[0])
+        budget_pelicula = round(director_df_resume['budget'].iloc[0])
+        revenue_pelicula = round(director_df_resume['revenue'].iloc[0])
 
         for movie in flattened_titles:
             movie_search_df = df_f6_df_expanded[df_f6_df_expanded['title'] == movie]
+            lista_movie_b_r_r = movie_search_df[['title', 'release_date', 'budget', 'revenue', 'return']].to_records(index=False)
+            # print(f'Listado de info peliculas para el director {nombre_director}')
+            # print(f'retorno_total_director: {retorno_total_director}')
+            # print(f'Listado de peliculas: {flattened_titles}')
+            # print(f'Listado de fechas para las peliculas retornadas: {movies_release_date}')
+            # print(f'Listado de Returns para las peliculas retornadas: {retorno_total_movies}')
+            # print(f'Listado de Revenues para las peliculas retornadas: {revenue_pelicula}')
+            # print(f'Listado de Budgets para las peliculas retornadas: {budget_pelicula}')
             
-            if not movie_search_df.empty:
-                movie_info = {
-                    'title': movie,
-                    'release_date': movie_search_df['release_date'].iloc[0],
-                    'budget': int(round(movie_search_df['budget'].iloc[0])),
-                    'revenue': int(movie_search_df['revenue'].iloc[0]),
-                    'return': int(round(movie_search_df['return'].iloc[0]))
-                }
-                peliculas_info.append(movie_info)
+        
+        return {'director': nombre_director, 'retorno_total_director': retorno_total_director, 
+                'peliculas': flattened_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
+                'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula}
 
-        response_dict = {
-            'retorno_total_director': retorno_total_director,
-            'peliculas_info': peliculas_info
-        }
-        print(response_dict)
-        return response_dict
-
-
-
-get_director('quentin tarantino')
 
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
