@@ -145,13 +145,13 @@ def productoras_exitosas(production_company: str):
     production_company = production_company.lower()
     
     # Print the production company name to debug and make sure it's properly received
-    print("Production Company:", production_company)
+    #print("Production Company:", production_company)
     
     # Filter the DataFrame to get data for the desired production company
-    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False)]
+    productora_data = df_f5_production_companies_return[df_f5_production_companies_return['production_companies_nombres'].str.contains(production_company, case=False,)]
     
     # Print the filtered DataFrame for debugging
-    print("Filtered DataFrame:\n", productora_data)
+    #print("Filtered DataFrame:\n", productora_data)
     
     # Verificar si la productora existe en el dataframe
     if productora_data.empty:
@@ -163,14 +163,14 @@ def productoras_exitosas(production_company: str):
     
     # Crear el diccionario de respuesta
     response_dict = {
-        'productora': production_company,
+        'productora': productora_data['production_companies_nombres'],
         'revenue_total': revenue_total,
         'cant_movies': cant_movies
     }
 
     return response_dict
 
-productoras_exitosas('pixar')
+# productoras_exitosas('pixar')
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
