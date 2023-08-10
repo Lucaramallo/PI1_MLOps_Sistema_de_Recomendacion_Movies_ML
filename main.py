@@ -44,8 +44,11 @@ df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_
 @app.get('/peliculas_idioma/{idioma}') # ok
 def peliculas_idioma(idioma: str):
     '''Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo, 
-    
-    ej: english'''
+    language_name
+    english
+    french
+    japanese
+    nota: Los valores de los idiomas deben ser insertados en ingles, ya que se descargo un set de datos extra on los ISO_languages registrados. https://datahub.io/core/language-codes '''
     idioma = idioma.lower()
     filtered_df = df_f1_lang_movie_count[df_f1_lang_movie_count['language_name'] == idioma]
     count = 0  # Inicializar la variable count como 0
