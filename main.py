@@ -224,7 +224,7 @@ def get_director(nombre_director: str):
             # print(f'listado de info movies: {lista_movie_b_r_r}')
         
         dict_rta =  {'director': nombre_director, 'retorno_total_director': retorno_total_director, 
-                'peliculas': flattened_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
+                'peliculas': movies_titles, 'fechas de lanzamiento': movies_release_date, 'retorno_peliculas': retorno_total_movies, 
                 'budget_peliculas': budget_pelicula, 'revenue_peliculas': revenue_pelicula, 'listado_de_info_movies': lista_movie_b_r_r}
         return(dict_rta)
        
