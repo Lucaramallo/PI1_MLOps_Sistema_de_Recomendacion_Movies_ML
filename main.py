@@ -167,6 +167,7 @@ def productoras_exitosas(production_company: str):
 # productoras_exitosas('pixar')
 
 
+
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
     ''' Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno.
@@ -177,37 +178,37 @@ def get_director(nombre_director: str):
     if df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director].empty:
         return {'mensaje': 'No encontramos el director en el set de datos...'}
     else:
-        director_df_resume = df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director]
-        retorno_total_director = int(round(director_df_resume['director_return'].iloc[0]))
+        director_row = df_f6_get_director[df_f6_get_director['directors_names'] == nombre_director].iloc[0]
+        retorno_total_director = int(round(director_row['director_return']))
 
-        movies_titles = director_df_resume['title']
-        flattened_titles = list(itertools.chain(*movies_titles))
+        movie_titles = director_row['title']
+        release_dates = director_row['release_date']
+        budgets = director_row['budget']
+        revenues = director_row['revenue']
+        returns = director_row['return']
 
         peliculas_info = []
 
-        for movie in flattened_titles:
-            movie_search_df = df_f6_df_expanded[df_f6_df_expanded['title'] == movie]
-            
-            if not movie_search_df.empty:
-                movie_info = {
-                    'title': movie,
-                    'release_date': movie_search_df['release_date'].iloc[0],
-                    'budget': int(round(movie_search_df['budget'].iloc[0])),
-                    'revenue': int(round(movie_search_df['revenue'].iloc[0])),
-                    'return': int(round(movie_search_df['return'].iloc[0]))
-                }
-                peliculas_info.append(movie_info)
+        for i in range(len(movie_titles)):
+            movie_info = {
+                'title': movie_titles[i],
+                'release_date': release_dates[i],
+                'budget': int(round(budgets[i])),
+                'revenue': int(round(revenues[i])),
+                'return': int(round(returns[i]))
+            }
+            peliculas_info.append(movie_info)
 
         response_dict = {
             'retorno_total_director': retorno_total_director,
             'peliculas_info': peliculas_info
         }
-
+        print(response_dict)
         return response_dict
 
 
 
-# get_director('quentin tarantino')
+get_director('quentin tarantino')
 
 @app.get('/recomendacion/{reference_movie}')
 def recomendacion(reference_movie: str, n: int = 16, cutoff: float = 0.5):
