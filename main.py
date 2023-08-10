@@ -139,7 +139,6 @@ def peliculas_pais(pais: str):
 # peliculas_pais('argentina')
 
 
-
 @app.get('/productoras_exitosas/{production_company}')
 def productoras_exitosas(production_company: str):
     '''Se ingresa la productora, retornando el promedio de ganancias y la ganancia total, ej pixar'''
@@ -150,22 +149,23 @@ def productoras_exitosas(production_company: str):
 
     # Verificar si la productora existe en el dataframe
     if productora_data.empty:
-        return f"La productora '{production_company}' no fue encontrada en el dataframe."
+        return {"error": f"La productora '{production_company}' no fue encontrada en el dataframe."}
 
-    # Calcular el revenue total de la productora
-    revenue_total = productora_data['return_per_company'].sum()
-    cant_movies = productora_data['count_movies'].sum()
+    # Convert numpy int64 values to regular Python integers
+    revenue_total = int(productora_data['return_per_company'].sum())
+    cant_movies = int(productora_data['count_movies'].sum())
 
     # Crear el diccionario de respuesta
     response_dict = {
-        'productora': productora_data['production_companies_nombres'].values[0],  # Tomar el nombre de la productora
+        'productora': production_company,
         'revenue_total': revenue_total,
         'cant_movies': cant_movies
     }
-    
+    print(response_dict)
     return response_dict
 
-productoras_exitosas('pixar')
+# productoras_exitosas('pixar')
+
 
 @app.get('/get_director/{nombre_director}')
 def get_director(nombre_director: str):
