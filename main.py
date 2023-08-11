@@ -44,7 +44,6 @@ df_f1_lang_movie_count, df_f2_movies_runtime, df_f3_collection_name_returns, df_
 @app.get('/peliculas_idioma/{idioma}') # ok
 def peliculas_idioma(idioma: str):
     '''
-    
      Ingresas el idioma, retornando la cantidad de peliculas producidas en el mismo:<br>
     - language_name<br>
     - english<br>
