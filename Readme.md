@@ -1,6 +1,8 @@
 Proyecto MLOps - Operaciones de Aprendizaje Automático
 ¡Bienvenidos al emocionante proyecto MLOps! En este proyecto, he trabajado arduamente para abordar desafíos en el despliegue y operación de modelos de Aprendizaje Automático. He adoptado el papel de un Ingeniero de MLOps para llevar a cabo este proyecto.
+
 video exxplicativo: https://drive.google.com/file/d/1ZfWhqqd8viU0lBHb1BoeIbYNUF6CGhuF/view?usp=sharing
+
 Introducción
 Este proyecto se centra en la creación y despliegue de un sistema de recomendación de películas utilizando un enfoque end-to-end. Desde la transformación de los datos hasta la creación de una API accesible, pasando por el análisis exploratorio y la implementación de un modelo de recomendación, cada paso ha sido cuidadosamente ejecutado para lograr los objetivos del proyecto.
 
