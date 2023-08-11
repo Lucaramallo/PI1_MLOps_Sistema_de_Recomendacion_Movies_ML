@@ -2,6 +2,7 @@ Proyecto MLOps - Operaciones de Aprendizaje Automático
 ¡Bienvenidos al emocionante proyecto MLOps! En este proyecto, he trabajado arduamente para abordar desafíos en el despliegue y operación de modelos de Aprendizaje Automático. He adoptado el papel de un Ingeniero de MLOps para llevar a cabo este proyecto.
 
 video exxplicativo: https://drive.google.com/file/d/1ZfWhqqd8viU0lBHb1BoeIbYNUF6CGhuF/view?usp=sharing
+
 enlace render (solo por 90 dias) = https://render-pi-mlops-movies-api.onrender.com/docs
 
 Introducción
